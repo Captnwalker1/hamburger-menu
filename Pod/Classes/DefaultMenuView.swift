@@ -44,7 +44,7 @@ class DefaultMenuView: MenuView {
                 button.setTitleColor(controller.view.tintColor, for: .normal)
                 button.setTitle(item.title, for: .normal)
                 button.tag = index
-                button.addTarget(self, action: Selector("buttonTap:"), for: .touchUpInside)
+                button.addTarget(self, action: #selector(DefaultMenuView.buttonTap), for: .touchUpInside)
                 stackView.addArrangedSubview(button)
                 
             }
@@ -52,7 +52,7 @@ class DefaultMenuView: MenuView {
         
     }
     
-    func buttonTap(sender: UIButton) {
+    @objc func buttonTap(sender: UIButton) {
         self.switchToTab(tab: sender.tag, andClose: true)
     }
     
