@@ -10,7 +10,7 @@
 
 import UIKit
 
-public class MenuView: UIView {
+open class MenuView: UIView {
     
     //MARK: Properties
     var rootView: UIView!
@@ -20,13 +20,13 @@ public class MenuView: UIView {
     ///The HamburgerMenuController this menu is attached to
     public var controller: MenuController!
    
-    init(rootView: UIView, controller: MenuController) {
+    public init(rootView: UIView, controller: MenuController) {
         self.init()
         
         self.initialize(rootView: rootView, controller: controller)
     }
     
-    func initialize(rootView: UIView, controller: MenuController) {
+    open func initialize(rootView: UIView, controller: MenuController) {
         //calculate a nice width for the menu
         var width = rootView.frame.size.width - 85
         if width > 400 {
