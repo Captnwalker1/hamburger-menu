@@ -4,6 +4,6 @@
 
 import Foundation
 
-func log(message: Any) {
+func Hlog(message: Any) {
     print("[HamburgerMenu] \(message)")
 }

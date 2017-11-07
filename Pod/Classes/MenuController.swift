@@ -29,15 +29,15 @@ public class MenuController: UITabBarController {
         super.viewDidLoad()
         
         let view = MenuControllerView(frame: self.view.frame)
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         
         view.addSubview(self.view)
-        self.view.constrainToSuperview(view)
+        self.view.constrainToSuperview(superview: view)
         
         self.view = view
 
         //hide the default tab bar
-        self.tabBar.hidden = true
+        self.tabBar.isHidden = true
         
         //add the menu
         if self.menuNib == nil || self.menuNib == "" {
@@ -47,10 +47,10 @@ public class MenuController: UITabBarController {
                 fatalError("Default Menu is only supported in iOS 9 or later. You must provide a custom menu nib")
             }
         } else {
-            guard let menu = UIView.instantiateFromNib(menuNib) as? MenuView else {
+            guard let menu = UIView.instantiateFromNib(nibName: menuNib) as? MenuView else {
                 fatalError("Menu Nib '\(menuNib).xib' must exist and be a subclass of `HamburgerMenu`")
             }
-            menu.initialize(self.view, controller: self)
+            menu.initialize(rootView: self.view, controller: self)
             self.menu = menu
         }
         
@@ -76,20 +76,20 @@ public class MenuController: UITabBarController {
     
     //MARK: Utility
     func log(message: Any) {
-        HamburgerMenu.log("[Controller] \(message)")
+        Hlog(message: "[Controller] \(message)")
     }
     
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         guard let touch = touches.first else {
             return
         }
         
-        let point = touch.locationInView(self.view)
-        if CGRectContainsPoint(self.view.bounds, point) {
+        let point = touch.location(in: self.view)
+        if self.view.bounds.contains(point) {
             if self.menu.open {
-                self.menu.toggle(true)
+                self.menu.toggle(animated: true)
             }
         }
     }
@@ -98,7 +98,7 @@ public class MenuController: UITabBarController {
 extension MenuController: HamburgerButton.ButtonDelegate {
 
     public func hamburgerButtonPressed(button: Button) {
-        self.menu.toggle(true)
+        self.menu.toggle(animated: true)
     }
     
 }

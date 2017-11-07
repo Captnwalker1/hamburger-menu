@@ -23,7 +23,7 @@ public class MenuView: UIView {
     init(rootView: UIView, controller: MenuController) {
         self.init()
         
-        self.initialize(rootView, controller: controller)
+        self.initialize(rootView: rootView, controller: controller)
     }
     
     func initialize(rootView: UIView, controller: MenuController) {
@@ -44,16 +44,16 @@ public class MenuView: UIView {
         
         //align to edges of super view
         self.rootView.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: self.rootView, attribute: .Top, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: self.rootView, attribute: .top, multiplier: 1, constant: 0)
         )
         self.rootView.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Trailing, relatedBy: .Equal, toItem: self.rootView, attribute: .Leading, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: self.rootView, attribute: .leading, multiplier: 1, constant: 0)
         )
         self.rootView.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: self.rootView, attribute: .Bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: self.rootView, attribute: .bottom, multiplier: 1, constant: 0)
         )
         self.rootView.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1, constant: self.width)
+            NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: self.width)
         )
     }
     
@@ -69,7 +69,7 @@ public class MenuView: UIView {
         self.controller.selectedIndex = tab
         
         if self.open && shouldClose {
-            self.toggle(true)
+            self.toggle(animated: true)
         }
     }
     
@@ -79,16 +79,16 @@ public class MenuView: UIView {
         
         for button in self.controller.buttons {
             if self.open {
-                button.transitionToHamburger(false)
-                button.transitionToX(animated)
+                button.transitionToHamburger(animated: false)
+                button.transitionToX(animated: animated)
             } else {
-                button.transitionToX(false)
-                button.transitionToHamburger(animated)
+                button.transitionToX(animated: false)
+                button.transitionToHamburger(animated: animated)
             }
         }
         
         if animated {
-            UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
                 self.toggleTransform()
             }, completion: nil)
         } else {
@@ -105,6 +105,6 @@ public class MenuView: UIView {
             left = 0
         }
         
-        self.rootView.transform = CGAffineTransformMakeTranslation(left, 0)
+        self.rootView.transform = CGAffineTransform(translationX: left, y: 0)
     }
 }

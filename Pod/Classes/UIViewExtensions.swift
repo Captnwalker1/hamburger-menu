@@ -6,8 +6,8 @@ extension UIView {
     class func instantiateFromNib(nibName: String) -> UIView {
         let view = UIView()
         
-        let elements = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil)
-        for element in elements {
+        let elements = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)
+        for element in elements! {
             if let element = element as? UIView {
                 return element
             }
@@ -22,16 +22,16 @@ extension UIView {
         
         //align to edges of super view
         superview.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0)
         )
         superview.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: superview, attribute: .Right, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superview, attribute: .right, multiplier: 1, constant: 0)
         )
         superview.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: superview, attribute: .Bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant: 0)
         )
         superview.addConstraint(
-            NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: superview, attribute: .Left, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: superview, attribute: .left, multiplier: 1, constant: 0)
         )
         
     }

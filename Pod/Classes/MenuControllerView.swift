@@ -15,13 +15,13 @@ class MenuControllerView: UIView {
     var menu: MenuView!
     
     //MARK: Touch
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        if CGRectContainsPoint(self.bounds, point) {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if self.bounds.contains(point) {
             return true
         }
     
         //allow touches to pass to the Menu
-        if CGRectContainsPoint(self.menu.frame, point) {
+        if self.menu.frame.contains(point) {
             return true
         }
         

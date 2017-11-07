@@ -14,37 +14,37 @@ class DefaultMenuView: MenuView {
     override init(rootView: UIView, controller: MenuController) {
         super.init(rootView: rootView, controller: controller)
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         
         let stackView = UIStackView()
-        stackView.axis = .Vertical
+        stackView.axis = .vertical
         self.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         //align to edges of super view
         self.addConstraint(
-            NSLayoutConstraint(item: stackView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 20)
+            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 20)
         )
         self.addConstraint(
-            NSLayoutConstraint(item: stackView, attribute: .Right, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: stackView, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0)
         )
        
         self.addConstraint(
-            NSLayoutConstraint(item: stackView, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: stackView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0)
         )
         
         if let items = controller.tabBar.items {
-            for (index, item) in items.enumerate() {
+            for (index, item) in items.enumerated() {
                 let button = UIButton()
                 
-                button.contentHorizontalAlignment = .Left
+                button.contentHorizontalAlignment = .left
                 button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
                 
-                button.setTitleColor(controller.view.tintColor, forState: .Normal)
-                button.setTitle(item.title, forState: .Normal)
+                button.setTitleColor(controller.view.tintColor, for: .normal)
+                button.setTitle(item.title, for: .normal)
                 button.tag = index
-                button.addTarget(self, action: Selector("buttonTap:"), forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: Selector("buttonTap:"), for: .touchUpInside)
                 stackView.addArrangedSubview(button)
                 
             }
@@ -53,7 +53,7 @@ class DefaultMenuView: MenuView {
     }
     
     func buttonTap(sender: UIButton) {
-        self.switchToTab(sender.tag, andClose: true)
+        self.switchToTab(tab: sender.tag, andClose: true)
     }
     
     override init(frame: CGRect) {
